@@ -23,6 +23,16 @@
 import numpy as np
 import matplotlib.pyplot as plt # pyplot is a sub section of matplotlib
 
+def plot_profile(grid, elevation, color = "r", title=None, output=None):  # name the function "plot_profile"
+	plt.figure() # open figure window
+	plt.plot(grid, elevation, color) # plot x vs z in red - the initial profile, a cliff
+	plt.xlabel("x")
+	plt.ylabel("z")
+	if title is not None:
+		plt.title(title)
+	if output is not None:
+		plt.savefig(output)
+
 # Start by setting two fixed model parameters - the diffusivity and the size of the model domain. Best practice: Use descriptive variable names, don't just name the variable a single letter. 
 
 D = 100 # diffusivity
@@ -43,13 +53,7 @@ z[x<=Lx / 2] = z_left # create the step function: use subscript automation. for 
 z[x > Lx / 2] = z_right # for values of z at x that are greater than half of the domain size, set them to z_right
 
 # Plot the initial profile. 
-
-plt.figure() # open figure window
-plt.plot(x, z, "r") # plot x vs z in red - the initial profile, a cliff
-plt.xlabel("x")
-plt.ylabel("z")
-plt.title("Initial hillslope profile")
-
+plot_profile(x, z, title = "Initial hillslope profile", output="initial_profile.png")
 
 # Set up time stepping for the model. Calculate a stable time step from a stability criterion. 
 
@@ -65,12 +69,6 @@ for t in range(0, nt):
 
 # Plot the result - we have diffused away the cliff. 
 
-plt.figure() # open figure window
-plt.plot(x, z, "b") # plot x vs z in blue - the final profile, after diffusion
-plt.xlabel("x")
-plt.ylabel("z")
-plt.title("Final hillslope profile")
-
-
+plot_profile(x, z, color="b", title = "Final hillslope profile", output="final_profile.png")
 
 
