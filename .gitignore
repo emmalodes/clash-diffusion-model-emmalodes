@@ -1,3 +1,4 @@
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -22,6 +23,11 @@ var/
 wheels/
 share/python-wheels/
 *.egg-info/
+
+
+# PNG files from model output
+*.png
+
 .installed.cfg
 *.egg
 MANIFEST
